@@ -37,6 +37,7 @@ namespace BusinessLayer.Concrete
         {
            return _blogDal.GetListWithCategory();
         }
+        
 
         public Blog GetById(int id)
         {

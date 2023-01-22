@@ -74,10 +74,15 @@ namespace DataAccessLayer.Migrations
                     b.Property<string>("BlogTitle")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int>("Category1ID")
+                        .HasColumnType("int");
+
                     b.Property<int>("CategoryID")
                         .HasColumnType("int");
 
                     b.HasKey("BlogID");
+
+                    b.HasIndex("Category1ID");
 
                     b.HasIndex("CategoryID");
 
@@ -103,6 +108,27 @@ namespace DataAccessLayer.Migrations
                     b.HasKey("CategoryID");
 
                     b.ToTable("Categories");
+                });
+
+            modelBuilder.Entity("EntityLayer.Concrete.Category1", b =>
+                {
+                    b.Property<int>("Category1ID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Category1Description")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Category1Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("Category1Status")
+                        .HasColumnType("bit");
+
+                    b.HasKey("Category1ID");
+
+                    b.ToTable("Categories1");
                 });
 
             modelBuilder.Entity("EntityLayer.Concrete.Comment", b =>
@@ -199,6 +225,12 @@ namespace DataAccessLayer.Migrations
 
             modelBuilder.Entity("EntityLayer.Concrete.Blog", b =>
                 {
+                    b.HasOne("EntityLayer.Concrete.Category1", "Category1")
+                        .WithMany("Blogs")
+                        .HasForeignKey("Category1ID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("EntityLayer.Concrete.Category", "Category")
                         .WithMany("Blogs")
                         .HasForeignKey("CategoryID")
@@ -206,6 +238,8 @@ namespace DataAccessLayer.Migrations
                         .IsRequired();
 
                     b.Navigation("Category");
+
+                    b.Navigation("Category1");
                 });
 
             modelBuilder.Entity("EntityLayer.Concrete.Comment", b =>
@@ -225,6 +259,11 @@ namespace DataAccessLayer.Migrations
                 });
 
             modelBuilder.Entity("EntityLayer.Concrete.Category", b =>
+                {
+                    b.Navigation("Blogs");
+                });
+
+            modelBuilder.Entity("EntityLayer.Concrete.Category1", b =>
                 {
                     b.Navigation("Blogs");
                 });

@@ -33,19 +33,10 @@
                         @item.BlogContent
                     </div>
                     <!-- bottom -->
-                    
-                    
+                        
                         }
-                    <div class="blog-single-tags d-flex align-items-center mt-4 pt-1 mb-5">
-                        <div class="blog-tags">
-                            <ul>
-                                <li class="text-tag">Tags:</li>
-                                <li><a href="#url">Fresh</a></li>
-                                <li><a href="#url">Foodie</a></li>
-                                <li><a href="#url">Eat</a></li>
-                                <li><a href="#url">Healthy</a></li>
-                            </ul>
-                        </div>
+                   <div class="blog-single-tags d-flex align-items-center mt-4 pt-1 mb-5">
+                        
                         <div class="social-singles ml-md-auto mt-md-0 mt-4">
                             <a href="#blog"><span class="fa fa-facebook" aria-hidden="true"></span></a>
                             <a href="#blog"><span class="fa fa-twitter" aria-hidden="true"></span></a>
@@ -54,15 +45,40 @@
                         </div>
                     </div>
                     <div class="single-pagination clearfix">
-                        <a class="prev-post pull-left" href="#prev"><span class="fa fa-arrow-left"
-                                aria-hidden="true"></span>
-                            Previous Post</a>
-                        <a class="next-post pull-right" href="#next">Next Post <span class="fa fa-arrow-right"
-                                aria-hidden="true"></span></a>
+                        
+                         <div class="blog-single-tags d-flex align-items-center mt-2 pt-1 mb-1">
+                        <div class="blog-tags">
+                            <ul>
+                                <li class="text-tag">Lezzetler:</li>
+                                <li><a href="#url">Fresh</a></li>
+                                <li><a href="#url">Foodie</a></li>
+                                <li><a href="#url">Eat</a></li>
+                                <li><a href="#url">Healthy</a></li>
+                                <li><a href="#url">Fresh</a></li>
+                                <li><a href="#url">Foodie</a></li>
+                                <li><a href="#url">Eat</a></li>
+                                <li><a href="#url">Healthy</a></li>
+                            </ul>
+                        </div>
+                        
+                    </div>
+
+                    <div class="blog-single-tags d-flex align-items-center mt-3 pt-1 mb-1">
+                        <div class="blog-tags">
+                                @await Component.InvokeAsync("CategoryList")
+                             </div>
+
+                    </div>
+
+
                     </div>
                     <!-- //blog single -->
                     <!-- comments section blog single -->
-                    @await Html.PartialAsync("~/Views/Comment/CommentListByBlog.cshtml")
+                    <h1>@ViewBag.i</h1>
+
+                    @await Component.InvokeAsync("CommentListByBlog",new {id=ViewBag.i})
+
+                    @*@await Html.PartialAsync("~/Views/Comment/CommentListByBlog.cshtml")*@
                     <!-- //comments section blog single -->
                     <!-- comments form blog single -->
                     @await Html.PartialAsync("~/Views/Comment/PartialAddComment.cshtml")
